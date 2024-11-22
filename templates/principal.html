@@ -3,8 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <title>Principal</title>
+    <link type="text/css" href="principal.html">
 </head>
 <body>
 
+    <h1>Galucine</h1>
+
+    {% if logged_in%}
+        <h2> Bienvenido, {{ username }}!</h2>
+        <p> Has iniciado sesión correctamente.</p>
+        <a href="{{ url_for('logout_function') }}">Cerrar sesión</a>
+    {% else %}
+
+        <h2> Bienvenido, usuario anónimo</h2>
+        <p> Si tienes una cuenta de usuario, puede iniciar sesión pulsando en login</p>
+        <a href="login.html">Página de login</a>
+    {% endif %}
+
+    <h2>Películas que le gustan</h2>
+    {% if pelis_fav %}
+        {% for peli in pelis_fav %}
+            <ul>
+                <li>Nombre: {{ peli['nombre'] }}</li>
+                <li>Sinopsis: {{ peli['sinopsis'] }}</li>
+                <li>Puntuación: {{ peli['Puntuacion'] }}</li>
+                <li>Género: {{ peli['genero'] }}</li>
+                <li>Fecha de salida: {{ peli['date'] }}</li>
+                <li>Número de capítulos: {{ peli['chapters'] }}</li>
+            </ul>
+        {% endfor %}
+    {% else %}
+        <p>No hay películas en esta lista.</p>
+    {% endif %}
+
+
+    <h2>Películas que está viendo</h2>
+    {% if pelis_fav %}
+        {% for peli in pelis_viendo %}
+            <ul>
+                <li>Nombre: {{ peli['nombre'] }}</li>
+                <li>Sinopsis: {{ peli['sinopsis'] }}</li>
+                <li>Puntuación: {{ peli['Puntuacion'] }}</li>
+                <li>Género: {{ peli['genero'] }}</li>
+                <li>Fecha de salida: {{ peli['date'] }}</li>
+                <li>Número de capítulos: {{ peli['chapters'] }}</li>
+            </ul>
+        {% endfor %}
+    {% else %}
+        <p>No hay películas en esta lista.</p>
+    {% endif %}
+
+    <h2>Películas que ya ha visto</h2>
+    {% if pelis_fav %}
+        {% for peli in pelis_vistas %}
+            <ul>
+                <li>Nombre: {{ peli['nombre'] }}</li>
+                <li>Sinopsis: {{ peli['sinopsis'] }}</li>
+                <li>Puntuación: {{ peli['Puntuacion'] }}</li>
+                <li>Género: {{ peli['genero'] }}</li>
+                <li>Fecha de salida: {{ peli['date'] }}</li>
+                <li>Número de capítulos: {{ peli['chapters'] }}</li>
+            </ul>
+        {% endfor %}
+    {% else %}
+        <p>No hay películas en esta lista.</p>
+    {% endif %}
+
+    <h4>Pulse <a href="{{ url_for('movies') }}">aquí</a> para añadir una película a sus listas</h4>
 </body>
 </html>

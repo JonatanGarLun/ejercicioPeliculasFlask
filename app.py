@@ -42,64 +42,135 @@ Requisitos Funcionales:
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'odio_javascript_que_asco'
 
-usuarios = [{ "Administrador": [{"nombre": "Jonatan","usuario": "Administrador", "password": "supercontraseñachupifantastica", "pelis_fav": [], "pelis_viendo": [], "pelis_vistas": []}] }]
-
+usuarios = [
+    {
+        "nombre": "Jonatan",
+        "usuario": "Administrador",
+        "password": "supercontraseñachupifantastica",
+        "pelis_fav": [],
+        "pelis_viendo": [],
+        "pelis_vistas": []
+    }
+]
 
 @app.route("/")
 def principal():
-    if "logged_in" in session:
-        return render_template("principal.html",
-            logged_in = session.get('logged_in') ,
-            username = session.get('username'))
-        # usuario logueado
-    else:
-        return redirect(url_for('registro'))
+    if "logged_in" in session and session.get("username"):
+        username = session.get('username')
+        for usuario in usuarios:
+            if usuario["usuario"] == username:
+                pelis_fav = usuario["pelis_fav"]
+                pelis_viendo = usuario["pelis_viendo"]
+                pelis_vistas = usuario["pelis_vistas"]
 
-
+                return render_template(
+                "principal.html",
+                    logged_in=True,
+                    username=username,
+                    pelis_fav=pelis_fav,
+                    pelis_viendo=pelis_viendo,
+                    pelis_vistas=pelis_vistas
+                )
+    return redirect(url_for('registro'))
 
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
-
     error = "El nombre de usario introducido ya está en uso"
 
     if request.method == 'POST':
         username = request.form['username']
+
         if comprueba_usuarios(username):
-            return render_template('registro.html', error= error)
+            return render_template('registro.html', error=error)
+
         name = request.form['name']
         password = request.form['password']
-        usuarios[username]["nombre"] = name
-        usuarios[username]["usuario"] = username
-        usuarios[username]["contraseña"] = password
+
+        nuevo_usuario = {
+            "nombre": name,
+            "usuario": username,
+            "password": password,
+            "pelis_fav": [],
+            "pelis_viendo": [],
+            "pelis_vistas": []
+        }
+
+        usuarios.append(nuevo_usuario)
+
         return render_template('login.html')
+
     return render_template('registro.html')
 
-def comprueba_usuarios(user):
 
-    estado = False
-    for  i in usuarios:
-        if user in usuarios[i]:
-            estado = True
-        else:
-            estado = False
-    return estado
+def comprueba_usuarios(user):
+    for usuario in usuarios:
+        if usuario["usuario"] == user:
+            return True
+    return False
+
 
 @app.route('/login', methods=['GET', 'POST'])
 
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # Validación de credenciales
         username = request.form['username']
         password = request.form['password']
 
-        if username in usuarios['usuario'] and password in usuarios['password']:
-            session['logged_in'] = True
-            session['username'] = username
-            return redirect(url_for('principal'))
-        else:
-            error = "Credenciales incorrectas, vuelve a intentarlo"
-            return render_template('login.html', error=error)
+        for usuario in usuarios:
+            if usuario["usuario"] == username and usuario["password"] == password:
+                session['logged_in'] = True
+                session['username'] = username
+                return redirect(url_for('principal'))
+
+        error = "Credenciales incorrectas, vuelve a intentarlo"
+        return render_template('login.html', error=error)
+
     return render_template('login.html')
+
+@app.route('/logout')
+def logout_function():
+    session.pop('logged_in', None)
+    session.pop('username', None)
+    return redirect(url_for('login'))
+
+@app.route('/movies', methods=['GET', 'POST'])
+@app.route('/movies', methods=['GET', 'POST'])
+def movies():
+    if request.method == 'POST':
+        name = request.form['name']
+        synopsis = request.form['synopsis']
+        rating = request.form['rating']
+        genre = request.form['genre']
+        date = request.form['date']
+        chapters = request.form['chapters']
+        category = request.form['categories']
+
+        if 'username' in session:
+            username = session['username']
+            for usuario in usuarios:
+                if usuario["usuario"] == username:
+                    nueva_peli = {
+                        "nombre": name,
+                        "sinopsis": synopsis,
+                        "Puntuacion": rating,
+                        "genero": genre,
+                        "date": date,
+                        "chapters": chapters,
+                        "category": category
+                    }
+
+                    if category == 'gusta':
+                        usuario["pelis_fav"].append(nueva_peli)
+                    elif category == 'ver':
+                        usuario["pelis_viendo"].append(nueva_peli)
+                    elif category == 'visto':
+                        usuario["pelis_vistas"].append(nueva_peli)
+        return redirect(url_for('principal'))
+
+    return render_template('peliculas.html')
+
+
 
 if __name__ == '__main__':
     app.run()
