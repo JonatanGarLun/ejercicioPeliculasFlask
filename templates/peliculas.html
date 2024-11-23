@@ -2,42 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de películas</title>
+    <link rel="stylesheet" href="../static/peliculas.css">
 </head>
 <body>
-    <h1>Formulario de registro de películas</h1>
+    <div class="container">
+        <h1>Formulario de registro de películas</h1>
 
-    <form method="post" action="{{ url_for('movies') }}">
+        <form method="post" action="{{ url_for('movies') }}">
+            <label for="name">Nombre: </label>
+            <input type="text" id="name" name="name" placeholder="Ejemplo: Inception" required>
+            <br><br>
 
-        <label for="name">Nombre: </label>
-        <input type="text" id="name" name="name" required>
-        <br><br>
-        <label for="synopsis">Sinopsis: </label>
-        <input type="text" id="synopsis" name="synopsis">
-        <br><br>
-        <label for="rating">Puntuación: </label>
-        <input type="number" id="rating" name="rating" min="0" max="10" required>
-        <br><br>
-        <label for="genre">Género: </label>
-        <input type="text" id="genre" name="genre" required>
-        <br><br>
-        <label for="date">Fecha de estreno: </label>
-        <input type="date" id="date" name="date" max="2024-12-31" required>
-        <br><br>
-        <label for="chapters">Número de capitulos: </label>
-        <input type="number" id="chapters" name="chapters" min="1" required>
-        <br><br>
-        <label for="categories">Categoría</label>
-        <select id="categories" name="categories">
-            <option value="gusta">Película que me gusta</option>
-            <option value="ver">Película que estoy viendo</option>
-            <option value="visto">Película que ya he visto</option>
-        </select>
-        <br><br>
-        <input type="submit" value="Enviar">
-        <input type="reset" value="Reiniciar formulario">
-    </form>
-    <a href="{{ url_for('principal') }}">Volver al inicio</a>
+            <label for="synopsis">Sinopsis: </label>
+            <textarea id="synopsis" name="synopsis" rows="3" placeholder="Breve descripción de la película..."></textarea>
+            <br><br>
 
+            <label for="rating">Puntuación: </label>
+            <input type="number" id="rating" name="rating" min="0" max="10" required>
+            <br><br>
+
+            <label for="genre">Género: </label>
+            <input type="text" id="genre" name="genre" placeholder="Ejemplo: Ciencia ficción" required>
+            <br><br>
+
+            <label for="date">Fecha de estreno: </label>
+            <input type="date" id="date" name="date" max="2024-12-31" required>
+            <br><br>
+
+            <label for="chapters">Número de capítulos: </label>
+            <input type="number" id="chapters" name="chapters" min="1" required>
+            <br><br>
+
+            <label for="categories">Categoría:</label>
+            <select id="categories" name="categories">
+                <option value="gusta">Película que me gusta</option>
+                <option value="ver">Película que estoy viendo</option>
+                <option value="visto">Película que ya he visto</option>
+            </select>
+            <br><br>
+
+            <div class="buttons">
+                <input type="submit" value="Enviar">
+                <input type="reset" value="Reiniciar formulario">
+            </div>
+        </form>
+
+        <p><a href="{{ url_for('principal') }}">Volver al inicio</a></p>
+    </div>
 </body>
 </html>

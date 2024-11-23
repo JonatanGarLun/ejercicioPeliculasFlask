@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/registro.css">
     <title>Registro</title>
 </head>
 <body>
@@ -11,6 +12,8 @@
     {% endif %}
 
 <form method="post" action="{{ url_for('registro') }}">
+
+    <h1>Registro</h1>
 
     <label for="name">Nombre</label>
     <input type="text" id="name" name="name" required>
@@ -23,7 +26,8 @@
     <br><br>
     <button type="submit">Registrate ahora!</button>
 
+    <p> ¿Ya tiene una cuenta? <a href="{{ url_for('login') }}">Acceda a nuestro sitio!</a></p>
+
 </form>
-<p> ¿Ya tiene una cuenta? <a href="{{ url_for('login') }}">Acceda a nuestro sitio!</a></p>
 </body>
 </html>

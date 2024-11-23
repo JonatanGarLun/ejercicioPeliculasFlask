@@ -1,3 +1,61 @@
+body {
+    background-color: lightblue; 
+    font-family: Arial, sans-serif; 
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    background-color: navy; 
+    color: white; 
+    padding: 20px;
+    text-align: center;
+    margin: 0;
+}
+
+h2 {
+    color: darkgoldenrod; 
+    font-family: 'Georgia', serif;
+    text-decoration: underline;
+    margin-top: 30px;
+}
+
+ul {
+    list-style-type: none; 
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+.peliculas h2 + ul {
+    margin-top: 15px;
+}
+
+p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.separator {
+    height: 8px;
+    background: linear-gradient(to right, navy, white, navy); 
+    margin: 30px 0;
+    border-radius: 5px;
+}
+
+a {
+    color: navy;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline; 
+}
+
 .text-center {
-    background-color: turquoise;
+    margin-bottom: 20px;
 }

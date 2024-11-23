@@ -1,0 +1,91 @@
+body {
+    background-color: lightcyan; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 400px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Georgia', serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: navy;
+    text-decoration: underline;
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: navy;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+input::placeholder, textarea::placeholder {
+    font-style: italic;
+    color: gray;
+}
+
+.buttons input[type="submit"],
+.buttons input[type="reset"] {
+    width: 48%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.buttons input[type="submit"] {
+    background-color: navy;
+    color: white;
+}
+
+.buttons input[type="reset"] {
+    background-color: crimson;
+    color: white;
+}
+
+.buttons input[type="submit"]:hover {
+    background-color: darkblue;
+}
+
+.buttons input[type="reset"]:hover {
+    background-color: darkred;
+}
+
+/* Enlace */
+a {
+    color: navy;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
