@@ -135,7 +135,6 @@ def logout_function():
     return redirect(url_for('login'))
 
 @app.route('/movies', methods=['GET', 'POST'])
-@app.route('/movies', methods=['GET', 'POST'])
 def movies():
     if request.method == 'POST':
         name = request.form['name']
